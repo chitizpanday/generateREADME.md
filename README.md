@@ -1,2 +1,2 @@
 # generateREADME.md
-Generate Dynamic Mark down file
+Generate Mark down file

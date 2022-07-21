@@ -1,5 +1,24 @@
 {
   "dependencies": {
     "inquirer": "^8.2.4"
-  }
+  },
+  "name": "generatereadme.md",
+  "description": "Generate Mark down file",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chitizpanday/generateREADME.md.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chitizpanday/generateREADME.md/issues"
+  },
+  "homepage": "https://github.com/chitizpanday/generateREADME.md#readme"
 }
