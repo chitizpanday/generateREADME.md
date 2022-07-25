@@ -1,74 +1,92 @@
 var inquirer = require('inquirer');
 var fs = require('fs');
+var path = require('path');
 var util = require('util');
+var generateMarkdown = require("./code");
+function writeToFile(fileName, data) {
+  return fs.writeFileSync(path.join(process.cwd(), fileName), data)
+}               // util.promisify(fs.writeFile);
 
-util.promisify(fs.writeFile);
+var Questions = [
+  {
+    type: "input",
+    name: "author",
+    message: "who is the author"
+  },
+  {
+    type: "input",
+    name: "username",
+    message: "what is your Github user name?"
+  },
+  {
+    type: "input",
+    name: "email",
+    message: "what is your email address?"
+  },
+  {
+    type: "input",
+    name: "title",
+    message: "what is your project title?"
+  },
+  {
+    type: "input",
+    name: "description",
+    message: "please provid a brief project description"
+  },
+  {
+    type: "list",
+    name: "license",
+    message: "what license does the project have",
+    choices: [
+      "MIT [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)",
 
-var Questions = () =>
-inquirer.Prompt([
-{
-type:"input",
-name: "author",
-message: "who is the author"
-},
-{
-  type:"input",
-name: "username",
-message: "what is your Github user name?"
-},
-{
-  type:"input",
-  name: "email",
-  message: "what is your email address?"
-},
-{
-  type:"input",
-name: "title",
-message: "what is your project title?"
-},
-{
-  type:"input",
-name: "description",
-message: "please write a brief project description"
-},
-{
-  type:"input",
-name: "license",
-message: "what license does the project have"
-},
-{
-  type:"input",
-name: "installations",
-message: "what dependencies and commands are required?"
-},
-{type:"input",
-name: "tests",
-message: "what commands are requied to run the test?"
-},
-{  type:"input",
-name: "usage",
-message: "what is the usage of the project?"
-},
-{  type:"input",
-name: "contribute",
-message: "how can a user contribute to the project?"
-},
-]);
+      "APACHE 2.0",
+      "GPL 3.0",
+      "BSD 3"]
+  },
+  {
+    type: "input",
+    name: "installations",
+    message: "what dependencies are need to be installed?"
+  },
+  {
+    type: "input",
+    name: "tests",
+    message: "what commands are requied to run the test?"
+  },
+  {
+    type: "input",
+    name: "usage",
+    message: "what is the project usage?"
+  },
+  {
+    type: "input",
+    name: "contribute",
+    message: "how can users make contributions to the project?"
+  },
+];
 
-function generateMD(data){
+function generateMD(data) {
   return `# ${data.title}
-  ${badge}
+  ${data.badge}
   ${data.description}
   ## Table of contents:
-  *[Installation](#installation)
-  *[Usage](#usage)
-  *[License](#license)
-  *[Contributing](#contributing)
-  *[Tests](#tests)
-  *[Questions](questions)
-  ###Installation:
-  In order to install the necessary dependencies, open the consol and run the following:
-  \`\`\`${data.installations}\`\`\`
+  ### *[Installation](#installation)
+
+  ### *[Usage](#usage)
+
+  ### *[License](#license)
+
+  ### *[Contributing](#contributing)
+
+  ### *[Tests](#tests)
+
+  ### *[Questions](#questions)
+
+  ### Installation:
+
+   To install the necessary dependencies, open the terminal and run the following:
+  ${data.installations}
   ### Usage:
   ${data.usage}
   ### License:
@@ -78,16 +96,26 @@ function generateMD(data){
   ${data.contribute}
   ### Tests:
   In order to test, open the console and run the following:
-  \`\`\`${data.tests}\`\`\`
+  ${data.tests}
   ### Questions:
   If you have any questions, please contact me at [Github](https://github.com/${data.username}) or contact ${data.author} at ${data.email}`
 
 }
 
-Questions()
-.then((data) => writeFileAsync('generatedREADME.md', generateMD(data)))
-.then(() => console.log ("successfully wrote to index,html"))
-.catch((errr) => console.error (err));
+
+function whatever() {
+  inquirer.prompt(Questions).then(inquirerResponse => {
+    console.log(inquirerResponse);
+    writeToFile("README.md", generateMarkdown({ ...inquirerResponse }))
+  })
+}
+whatever();
+
+
+// Questions()
+// .then((data) => writeFileAsync('generatedREADME.md', generateMD(data)))
+// .then(() => console.log ("successfully wrote to index,html"))
+// .catch((errr) => console.error (err));
 
 
 
