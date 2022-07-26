@@ -1,5 +1,5 @@
-# dsds
-  dsds
+# READMEGen.md
+  The project READMEGen.md seeks to generate a standard readme file based on the user’s input using node.js and inquirer
   ## Table of contents:
   ### *[Installation](#installation)
 
@@ -16,16 +16,16 @@
   ### Installation:
 
    To install the necessary dependencies, open the terminal and run the following:
-  dsds
+  inquirer
   ### Usage:
-  fds
+  the project helps save time
   ### License:
   this project is licensed under:
   MIT [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
   ### Contributing:
-  fds
+  no contribution at this time
   ### Tests:
   In order to test, open the console and run the following:
-  ds
+  npm init -y
   ### Questions:
-  If you have any questions, please contact me at [Github](https://github.com/fsddsf) or contact dsd at dsds
+  If you have any questions, please contact me at [Github](https://github.com/chitizpanday) or contact chitiz panday at pandchit@isu.edu

@@ -3,11 +3,9 @@ var fs = require('fs');
 var path = require('path');
 var util = require('util');
 
-
-var generateMarkdown = require("./code");
 function writeToFile(fileName, data) {
   return fs.writeFileSync(path.join(process.cwd(), fileName), data);
-}               // util.promisify(fs.writeFile);
+}              
 
 
 var Questions = [
@@ -110,7 +108,7 @@ function whatever() {
   inquirer.prompt(Questions).then(inquirerResponse => {
     console.log(inquirerResponse);
     var markDownData = generateMD({ ...inquirerResponse });
-    writeToFile("README.md", markDownData)
+    writeToFile("README.md",markDownData)
   })
 }
 whatever();
