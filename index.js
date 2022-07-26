@@ -2,10 +2,13 @@ var inquirer = require('inquirer');
 var fs = require('fs');
 var path = require('path');
 var util = require('util');
+
+
 var generateMarkdown = require("./code");
 function writeToFile(fileName, data) {
-  return fs.writeFileSync(path.join(process.cwd(), fileName), data)
+  return fs.writeFileSync(path.join(process.cwd(), fileName), data);
 }               // util.promisify(fs.writeFile);
+
 
 var Questions = [
   {
@@ -40,9 +43,10 @@ var Questions = [
     choices: [
       "MIT [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)",
 
-      "APACHE 2.0",
+      "APACHE 2.0 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) ",
       "GPL 3.0",
-      "BSD 3"]
+      "BSD 3 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause) "
+    ]
   },
   {
     type: "input",
@@ -68,7 +72,6 @@ var Questions = [
 
 function generateMD(data) {
   return `# ${data.title}
-  ${data.badge}
   ${data.description}
   ## Table of contents:
   ### *[Installation](#installation)
@@ -106,39 +109,11 @@ function generateMD(data) {
 function whatever() {
   inquirer.prompt(Questions).then(inquirerResponse => {
     console.log(inquirerResponse);
-    writeToFile("README.md", generateMarkdown({ ...inquirerResponse }))
+    var markDownData = generateMD({ ...inquirerResponse });
+    writeToFile("README.md", markDownData)
   })
 }
 whatever();
 
 
-// Questions()
-// .then((data) => writeFileAsync('generatedREADME.md', generateMD(data)))
-// .then(() => console.log ("successfully wrote to index,html"))
-// .catch((errr) => console.error (err));
 
-
-
-
-
-
-// TODO: Create a function that returns a license badge based on which license is passed in
-// If there is no license, return an empty string
-// function renderLicenseBadge(license) {}
-
-// // TODO: Create a function that returns the license link
-// // If there is no license, return an empty string
-// function renderLicenseLink(license) {}
-
-// // TODO: Create a function that returns the license section of README
-// // If there is no license, return an empty string
-// function renderLicenseSection(license) {}
-
-// // TODO: Create a function to generate markdown for README
-// function generateMarkdown(data) {
-//   return `# ${data.title}
-
-// `;
-// }
-
-// module.exports = generateMarkdown;
